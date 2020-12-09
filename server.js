@@ -60,8 +60,8 @@ app.post("/login", async (req, res) => {
 
 function authToken(req, res, next) {
   console.log("hi");
-  const authHeader = req.headers;
-  const token = authHeader;
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authToken.split(" ")[1];
   console.log(authHeader);
   if (token == null) {
     return res.status(401);
@@ -72,7 +72,6 @@ function authToken(req, res, next) {
       }
       req.user = user;
       next();
-      console.log("authtoken");
     });
   }
 }
